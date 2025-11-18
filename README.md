@@ -13,7 +13,6 @@ I take customer data from several sources and turns it into actionable segmentat
 - Transactions: purchase amounts, product info, and dates
 - Customer Demographics: gender, age, wealth segment, job industry
 - Address Information: state, country, and property valuation
-- New Customer List: details about recent sign-ups
 
 These tables were cleaned and merged using SQL, then processed further in Python. I engineered several features that help describe each customer’s shopping behavior, such as:
 
@@ -33,5 +32,97 @@ The final result is a clear breakdown of three customer types:
 - At-risk or low-engagement customers
 
 This segmentation can help the store prioritize the people who matter most while also identifying customers who may need re-engagement strategies. Overall, the project demonstrates a full machine-learning workflow built to solve a real business problem in retail analytics.
+
+## Data 
+- Transaction data: orders, order details, products, and dates.
+- Customer data: demographics, gender, age, job industry, wealth segment, and customer property valuation.
+
+## Methodology 
+The project follows a full end-to-end analytics workflow, starting from raw data and ending with an interpretable customer segmentation model.
+
+1. Data Extraction (SQL)
+I combined data from four tables: transactions, demographics, addresses, and a new customer list.
+Using SQL, I:
+- cleaned inconsistent fields (e.g., gender, state)
+- removed non-approved transactions
+- calculated customer-level metrics like total_spent and transaction_count
+- extracted key timestamps for first_purchase and most_recent_purchase
+- The result was a single, cleaned customer dataset ready for analysis.
+
+2. Data Cleaning & Preprocessing (Python)
+After loading the SQL output into Python, I:
+- handled missing values and dropped unusable rows
+- one-hot encoded categorical fields (gender, industry, state, wealth segment, etc.)
+- created new features such as:
+  - days_since_last_purchase
+  - customer_tenure_days
+  - average spend per transaction
+- filtered unrealistic or extreme values based on distributions
+- scaled numerical features with StandardScaler, since K-Means is distance-based
+
+This step ensured all features contributed fairly during clustering.
+
+3. Clustering Model (K-Means)
+
+To decide the number of segments, I compared:
+- Elbow Curve (inertia)
+- Silhouette Score
+
+Both pointed to 3 clusters as the most balanced option.
+I then trained K-Means on the standardized data and assigned each customer a segment label.
+
+To visualize the result, I used PCA to reduce the dataset to two components, making it easier to interpret cluster separation.
+
+4. Cluster Profiling
+
+With cluster labels added, I profiled each segment in two ways:
+
+- Numerical profiling: total spend, purchase frequency, recency, tenure, bike-related purchases
+- Categorical profiling: gender, job industry, car ownership, wealth segment, and state
+
+This helped translate the raw cluster output into meaningful business descriptions.
+
+5. Dashboard & Visualization (Tableau)
+
+Finally, I exported the clustered dataset into Tableau and built an interactive dashboard featuring:
+- overall cluster distribution
+- spending and transaction patterns
+- demographic breakdowns
+- geographic mapping across Australian states
+
+These visuals make the segmentation easy to understand for non-technical users and support business decision-making.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

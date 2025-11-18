@@ -1,0 +1,23 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+env/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data
+dataset/raw/
+dataset/processed/
+*.csv
+*.xlsx
+
+# Logs
+*.log
+logs/

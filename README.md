@@ -41,6 +41,7 @@ This segmentation can help the store prioritize the people who matter most while
 The project follows a full end-to-end analytics workflow, starting from raw data and ending with an interpretable customer segmentation model.
 
 1. Data Extraction (SQL)
+   
 I combined data from four tables: transactions, demographics, addresses, and a new customer list.
 Using SQL, I:
 - cleaned inconsistent fields (e.g., gender, state)
@@ -50,6 +51,7 @@ Using SQL, I:
 - The result was a single, cleaned customer dataset ready for analysis.
 
 2. Data Cleaning & Preprocessing (Python)
+   
 After loading the SQL output into Python, I:
 - handled missing values and dropped unusable rows
 - one-hot encoded categorical fields (gender, industry, state, wealth segment, etc.)
